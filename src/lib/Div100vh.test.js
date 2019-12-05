@@ -72,3 +72,10 @@ it("doesn't pass dontResize prop", () => {
   const { dontResize } = getDivProps(component);
   expect(dontResize).toBeUndefined();
 });
+
+it('applies styles immediately on first render', () => {
+  const component = new Div100vh({ style: { height: '50.5rvh' } });
+  const initialRenderedComponent = renderer.create(component.render());
+  const props = initialRenderedComponent.root.props;
+  expect(props).toEqual({ style: { height: '505px' } });
+});
